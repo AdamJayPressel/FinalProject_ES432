@@ -1,5 +1,4 @@
-import random
-import json
+import random, json, requests
 from flask import (Flask,
                    request,
                    url_for,
@@ -35,3 +34,9 @@ def cheep():
     # TODO: append [name: message] to a file of cheeps
     # TODO: display the cheep on the kit LCD
     return render_template('thankyou.html')
+
+r = requests.get("http://api.openweathermap.org/data/2.5/weather?id=4347242&units=imperial&APPID=82e23dff4157ebabffea65f0497b0a81")
+data = r.json()
+temp = data['main']['temp']
+humidity = data['main']['humidity']
+
