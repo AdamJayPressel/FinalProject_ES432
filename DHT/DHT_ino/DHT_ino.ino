@@ -10,14 +10,13 @@ DHT dht(DHTPIN, DHTTYPE);
 
 void setup() {
   Serial.begin(9600);
-  Serial.println("DHTxx test!");
 
   dht.begin();
 }
 
 void loop() {
   // Wait a few seconds between measurements.
-  delay(2000);
+  delay(1000);
 
   // Reading temperature or humidity takes about 250 milliseconds!
   // Sensor readings may also be up to 2 seconds 'old' (its a very slow sensor)
@@ -26,18 +25,14 @@ void loop() {
   float t = dht.readTemperature();
   // Read temperature as Fahrenheit (isFahrenheit = true)
   float f = dht.readTemperature(true);
-
-  // Check if any reads failed and exit early (to try again).
-  if (isnan(h) || isnan(t) || isnan(f)) {
-    Serial.println("Failed to read from DHT sensor!");
-    return;
+  if (Serial.available() > 0){
+    if (Serial.read == 'p'){
+      Serial.print(h);
+      Serial.print(",");
+      Serial.print(t);
+      Serial.print(",");
+      Serial.println(f);
+    }
   }
-
-  
-  Serial.print(h);
-  Serial.print(",");
-  Serial.print(t);
-  Serial.print(",");
-  Serial.println(f);
 
 }
