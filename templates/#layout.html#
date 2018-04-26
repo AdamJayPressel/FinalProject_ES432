@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang ="en">
+  <head>
+    <title>Weather Dashboard</title>
+    <!-- bootstrap style sheet -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- Gauge Canvas library -->
+    <script src="//cdn.rawgit.com/Mikhus/canvas-gauges/gh-pages/download/2.1.4/all/gauge.min.js"></script>
+    <!-- FontAwesome icons -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js"></script>
+    <!-- custom script file -->
+    <script src="static/script.js"></script>
+    <!-- TODO: add a favicon: https://www.favicon-generator.org/ -->
+    
+  </head>
+  <body>
+    <div class="container">
+    {% block body %}
+    Custom content here!
+    {% endblock %}
+    </div>
+  </body>
+</html>

@@ -1,4 +1,5 @@
-import random, json, requests
+#!/usr/bin/python
+import random, json, requests, serial
 from flask import (Flask,
                    request,
                    url_for,
@@ -12,12 +13,24 @@ def home():
 
 @app.route("/data.json")
 def data():
-    # TODO read temperature and humidity from Arduino
+    # read temperature and humidity from Arduino
+    s = Serial.serial('/dev/ttyAMC0')
+    s.write('p')
+    dataStream = s.readline()
+    if(dataStream is None or dataStream==''):
+        #TODO
+    splitData = dataStream.rstrip().split(',')
     indoor_temp = random.randint(60,80)
     indoor_humidity = random.random()
-    # TODO read temperature and humidity from openweathermap.org
-    outdoor_temp = random.randint(30,50)
-    outdoor_humidity = random.random()
+
+    s.close()
+    
+    # read temperature and humidity from openweathermap.org
+    r = requests.get("http://api.openweathermap.org/data/2.5/weather?id=4347242&units=imperial&APPID=82e23dff4157ebabffea65f0497b0a81"
+    data = r.json()
+    outdoor_temp = data['main']['temp']
+    outdoor_humidity = data['main']['humidity']
+    
     # send the result as JSON
     return json.dumps({
         "indoor_temp": indoor_temp,
@@ -35,8 +48,5 @@ def cheep():
     # TODO: display the cheep on the kit LCD
     return render_template('thankyou.html')
 
-r = requests.get("http://api.openweathermap.org/data/2.5/weather?id=4347242&units=imperial&APPID=82e23dff4157ebabffea65f0497b0a81")
-data = r.json()
-temp = data['main']['temp']
-humidity = data['main']['humidity']
+
 
