@@ -32,11 +32,11 @@
      on submit POST the data to /cheep
      
  -->
-<form>
-  <div class="form-group">
-    <label for="formGroupExampleInput">Send a Cheep!</label>
-    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Cheep Cheep">
-  </div>
+<form action="/cheep" method="post">
+    
+    <input type="text" name="name" placeholder="name here"></input>
+    <input type="submit" name="message"></input>
+    <button type="submit">Cheep!</button>
   
 </form>
 
