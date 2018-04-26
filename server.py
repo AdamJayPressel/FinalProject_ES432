@@ -19,10 +19,10 @@ def data():
     dataStream = s.readline()
     if(dataStream is None or dataStream==''):
         #TODO
+        pass
     splitData = dataStream.rstrip().split(',')
-    indoor_temp = random.randint(60,80)
-    indoor_humidity = random.random()
-
+    indoor_temp = splitData[1]
+    indoor_humidity = splitData[0]
     s.close()
     
     # read temperature and humidity from openweathermap.org
@@ -38,14 +38,17 @@ def data():
         "outdoor_temp": outdoor_temp,
         "outdoor_humidity": outdoor_humidity})
 
-
+#form, action is the url, and method post
 @app.route("/cheep",methods=['POST'])
 def cheep():
     name = request.form['name']
     message = request.form['message']
     print("got a cheep from [%s]: %s" % (name,message))
     # TODO: append [name: message] to a file of cheeps
+    with open("cheeps.log",'a') as f:
+                     f.write("%s, %s" %(name,messge))
     # TODO: display the cheep on the kit LCD
+                     
     return render_template('thankyou.html')
 
 
