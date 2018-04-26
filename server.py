@@ -48,6 +48,16 @@ def cheep():
     with open("cheeps.log",'a') as f:
                      f.write("%s, %s" %(name,messge))
     # TODO: display the cheep on the kit LCD
+    s = Serial.serial('/dev/ttyAMC0')
+    s.write('p')
+    dataStream = s.readline()
+    if(dataStream is None or dataStream==''):
+        #TODO
+        pass
+    splitData = dataStream.rstrip().split(',')
+    indoor_temp = splitData[1]
+    indoor_humidity = splitData[0]
+    s.close()        
                      
     return render_template('thankyou.html')
 

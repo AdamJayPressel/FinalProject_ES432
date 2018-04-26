@@ -1,17 +1,28 @@
 #include <Adafruit_Sensor.h>
-
 #include "DHT.h"
+#include <LiquidCrystal.h>
 
 #define DHTPIN 7     // what digital pin we're connected to
-
 #define DHTTYPE DHT11   // DHT 11
+#define rs
+#define en
+#define d4
+#define d5 
+#define d6
+#define d7
 
+LiquidCrystal lcd(rs, en, d4, d5, d6, d7)
 DHT dht(DHTPIN, DHTTYPE);
 
 void setup() {
   Serial.begin(9600);
 
   dht.begin();
+  lcd.begin(16,2);
+  lcd.print("austin smells");
+  delay(1000);
+  lcd.clear();
+  lcd.blink();
 }
 
 void loop() {
@@ -26,12 +37,16 @@ void loop() {
   // Read temperature as Fahrenheit (isFahrenheit = true)
   float f = dht.readTemperature(true);
   if (Serial.available() > 0){
-    if (Serial.read == 'p'){
+    c = Serial.read;
+    if (c == 'p'){ //print to serial line
       Serial.print(h);
       Serial.print(",");
       Serial.print(t);
       Serial.print(",");
       Serial.println(f);
+    }
+    else if(c == 'd'){//display on LCD
+      
     }
   }
 
