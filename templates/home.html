@@ -1,31 +1,27 @@
 {% extends "layout.html" %}
-{% block body %}
-<style>
-  .background{
-  background-image: url("https://www.loriswebs.com/images/cloudbg1sml.jpg");
-  background-size: cover;
-  
-  
-  }
-  .weatherbox{
-  float:left;
-  width: 400px
-  height: 400px
-  border: 2px solid black;
-  padding: 25px;
-  margin: 10px;
-  }
 
-  .cheepbox{
-  float:left;
-  width: 300px
-  height: 200px
-  border: 2px solid black;
-  padding: 0px;
-  margin: 10px;
-  }
-  
-</style>
+{% block custom_css %}
+
+body {
+background-image: url("http://sandermechanical.com/wp-content/uploads/2014/05/009-Blue-Sky-with-Clouds-300x236.jpg");
+background-size: cover;
+background-repeat: no-repeat;
+}
+
+textblock {
+border-style: solid;
+border-width: 2px;
+}
+container {
+border-style: solid;
+border-width: 2px;
+}
+
+{% endblock %}
+
+
+{% block body %}
+
 <!-- TODO: style with boostrap -->
 <h2>The current conditions: </h2>
 
@@ -33,7 +29,7 @@
 <i class="far fa-sun fa-5x" style="color: orange"></i>
 <i class="fas fa-cloud fa-5x" style="color: gray"></i>
 
-<ul style="border: 2px">
+<ul class="textblock">
   <li> The indoor temperature is <b id="indoor_temp">??</b> </li>
   <li> The indoor humidity is <b id="indoor_humidity">??</b> </li>
   <li> The outdoor temperature is <b id="outdoor_temp">??</b> </li>
@@ -42,7 +38,7 @@
 
 <!-- see https://canvas-gauges.com/documentation/examples/ -->
 <div class="row" style="border: 2px">
-<div class="weatherbox">
+<div class="container" id="weather">
   <canvas
      id="indoor_temp_gauge"
      data-title="Indoor Temperature"
@@ -118,7 +114,7 @@
      ></canvas>
 </div>
 </div>
-<div class="cheepbox">
+<div class="container" id="cheeps">
   <h2>Send a cheep</h2>
   <!-- TODO: add form with a name and message field:
        on submit POST the data to /cheep -->
