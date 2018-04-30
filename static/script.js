@@ -18,9 +18,7 @@ function getData(){
 	$("#outdoor_humidity_gauge").attr("data-value",weather.outdoor_humidity)
 
     });
-    $(document).ready(function(){
-	$('html').css({'background-image', 'url("https://thumbs.dreamstime.com/b/blue-sky-white-clouds-background-60439239.jpg")'})
-    })
+    
 }
 
 $(function(){
