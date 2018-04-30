@@ -12,7 +12,11 @@ function getData(){
 
 	//or use a gauge from https://canvas-gauges.com/
 	//see: https://canvas-gauges.com/documentation/user-guide/configuration
-	$("#temp_gauge").attr("data-value",weather.indoor_temp)
+	$("#indoor_temp_gauge").attr("data-value",weather.indoor_temp)
+	$("#indoor_humidity_gauge").attr("data-value",weather.indoor_humidity)
+	$("#outdoor_temp_gauge").attr("data-value",weather.outdoor_temp)
+	$("#outdoor_humidity_gauge").attr("data-value",weather.outdoor_humidity)
+
     });
 }
 

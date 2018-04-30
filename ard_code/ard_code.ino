@@ -12,7 +12,9 @@
 #define d7 6
 
 char c;
-String cheep;
+char name[16];
+char message[16];
+char temp;
 
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 DHT dht(DHTPIN, DHTTYPE);
@@ -47,11 +49,33 @@ void loop() {
       Serial.println(f);
     }
     else if(c == 'c'){//display on LCD
-      delay(100);
-      cheep = Serial.readString();
       lcd.clear();
       lcd.setCursor(0,0);
-      lcd.print(cheep);
+      for(int i=0; i<16; i++){
+        temp = Serial.read();
+        if(temp!=';'){
+          name[i]=temp;
+        }else{
+          break;
+        }
+      }
+      for(int i=0; i<16; i++){
+        temp = Serial.read();
+        if(temp!=':'){
+          message[i]=temp;
+        }else{
+          break;
+        }
+      }
+      
+      lcd.print(name);
+      lcd.print(" cheeps:");
+      lcd.setCursor(0,1);
+      lcd.print(message);
+      for(int i=0; i<16; i++){
+        name[i] = NULL;
+        message[i] = NULL;
+      }
     }
   }
 
